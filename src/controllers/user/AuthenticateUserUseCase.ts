@@ -2,7 +2,7 @@ import { prisma } from "../../lib/prisma";
 import { compare } from "bcrypt";
 import { GenerateRefreshToken } from "../../provider/genereateRefreshToken";
 import { GenerateToken } from "../../provider/GenerateToken";
-import { sign } from "jsonwebtoken";
+import cookie from "js-cookie";
 
 interface IRequest {
   email: string;
@@ -29,6 +29,12 @@ export class AuthenticateUserUseCase{
     
     const generateTokenProvider = new GenerateToken()
     const token = await generateTokenProvider.execute(userAlreadyExists.id)
+
+    cookie.set('access_token', token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'strict'
+    });
 
     await prisma.refreshToken.deleteMany({
       where: {

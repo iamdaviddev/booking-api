@@ -10,15 +10,11 @@ import { AuthenticateUserController } from "../controllers/user/AuthenticateUser
 import { ensureAuthenticated } from "../middlewares/ensureAuthenticateUser";
 import { RefreshTokenUserController } from "../controllers/refreshtoken/refreshTokenController";
 
-
 const createUserController = new CreateUserController();
 const authenticateUserController = new AuthenticateUserController();
 const bookingController = new BookingController();
 const roomsController = new RoomController();
 const refreshTokenController = new RefreshTokenUserController();
-
-
-const upload = multer(uploadsconfig);
 
 
 export const router = Router();
