@@ -60,7 +60,6 @@ export class AuthController {
       throw new Error("Password is incorrect")
     }
 
-    const token = jwt.sign({ userId: user.id }, "secret", { expiresIn: "60s" })
 
     const generateToken = new GenerateToken()
     const toKen = generateToken.execute(user.id)
@@ -68,7 +67,7 @@ export class AuthController {
     const generateRefreshToken = new GenerateRefreshToken()
     const refreshToken = generateRefreshToken.execute(user.id)
 
-    response.json({ user, token, refreshToken, toKen })
+    response.status(200).json({ user, refreshToken, toKen })
   }
 
   async uploadAvatar(request: Request, response: Response){
