@@ -31,11 +31,10 @@ export class BookingController {
         roomId,
         checkinDate,
         checkoutDate,
-        amout,
-        price
+        amout
       }
     })
 
-    return response.json({ booking });
+    return response.status(201).json({ booking });
   }
 }
