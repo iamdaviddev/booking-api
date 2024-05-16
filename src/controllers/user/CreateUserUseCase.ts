@@ -5,6 +5,7 @@ interface IuserRequest {
   name: string;
   email: string;
   password: string;
+  userType: number
 }
 
 export class CreateUserUseCase {
@@ -13,7 +14,7 @@ export class CreateUserUseCase {
     return users;
   }
 
-  async execute({ name, email, password }: IuserRequest){
+  async execute({ name, email, password, userType }: IuserRequest){
     const userExists = await prisma.user.findUnique({
       where: {
         email
@@ -30,6 +31,7 @@ export class CreateUserUseCase {
       data: {
         name,
         email,
+        userType,
         password: hash_password,
       }
     })

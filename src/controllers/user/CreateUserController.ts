@@ -10,11 +10,11 @@ export class CreateUserController {
   }
 
   async handle(request: Request, response: Response){
-    const { name, email, password } = request.body;
+    const { name, email, password, userType } = request.body;
 
     const createUserUseCase = new CreateUserUseCase()
 
-    const user = await createUserUseCase.execute({ name, email, password })
+    const user = await createUserUseCase.execute({ name, email, password, userType })
 
     return response.status(201).json({ user })
   }
