@@ -28,7 +28,6 @@ model Booking {
   checkinDate  DateTime
   checkoutDate DateTime
   amout        Int
-  price        Int
   userId       String
   roomId       String
 
