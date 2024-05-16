@@ -3,6 +3,7 @@ import { compare } from "bcrypt";
 import { GenerateRefreshToken } from "../../provider/genereateRefreshToken";
 import { GenerateToken } from "../../provider/GenerateToken";
 import { sign } from "jsonwebtoken";
+import { RequestError } from "../../typeErrors/error-api";
 
 interface IRequest {
   email: string;
@@ -21,10 +22,10 @@ export class AuthenticateUserUseCase{
       throw new Error("User or password incorrect")
     }
 
-    const passwordMatch = compare(password, userAlreadyExists.password)
+    const passwordMatch = await compare(password, userAlreadyExists.password)
 
     if(!passwordMatch){
-      throw new Error("User or password incorrect")
+      throw new RequestError("User or password incorrect")
     }
     
     const generateTokenProvider = new GenerateToken()
