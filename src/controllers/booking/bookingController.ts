@@ -9,7 +9,7 @@ export class BookingController {
   }
 
   async create(request: Request, response: Response) {
-    const { userId, roomId, checkinDate, checkoutDate, amout, price } = request.body;
+    const { userId, roomId, checkinDate, checkoutDate, amout } = request.body;
 
     const existingBooking = await prisma.booking.findFirst({
       where: {

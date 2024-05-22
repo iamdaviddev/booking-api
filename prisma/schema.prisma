@@ -17,7 +17,6 @@ model User {
   updatedAt DateTime @updatedAt
 
   Booking Booking[]
-  avatar  String?
   refresh_token RefreshToken?
 
   @@map("users")
@@ -37,16 +36,6 @@ model Booking {
   @@map("bookings")
 }
 
-model Image {
-  id    String @id @default(uuid())
-  image String?
-
-  room Room @relation(fields: [roomId], references: [id])
-  roomId String
-
-  @@map("images")
-}
-
 model Room {
   id             String    @id @default(uuid())
   name           String
@@ -55,7 +44,6 @@ model Room {
   price          Float
 
   Booking Booking[]
-  images   Image[]
 
   @@map("rooms")
 }

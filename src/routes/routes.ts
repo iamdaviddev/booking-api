@@ -3,8 +3,6 @@ import { Router } from "express";
 import { BookingController } from "../controllers/booking/bookingController";
 import { RoomController } from "../controllers/room/roomController";
 
-import multer from 'multer';
-import uploadsconfig from '../config/multer';
 import { CreateUserController } from "../controllers/user/CreateUserController";
 import { AuthenticateUserController } from "../controllers/user/AuthenticateUserController";
 import { ensureAuthenticated } from "../middlewares/ensureAuthenticateUser";
@@ -29,8 +27,8 @@ router.post("/refresh-token", refreshTokenController.handle);
 
 //Booking routes
 router.get("/bookings", bookingController.index);
-router.post("/bookings", bookingController.create);
+router.post("/bookings", ensureAuthenticated, bookingController.create);
 
 //Room routes
 router.get("/rooms", roomsController.index);
-router.post("/rooms", roomsController.create);
+router.post("/rooms", ensureAuthenticated, roomsController.create);
