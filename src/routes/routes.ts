@@ -27,7 +27,7 @@ router.post("/refresh-token", refreshTokenController.handle);
 
 //Booking routes
 router.get("/bookings", bookingController.index);
-router.post("/bookings", ensureAuthenticated, bookingController.create);
+router.post("/bookings", bookingController.create);
 
 //Room routes
 router.get("/rooms", roomsController.index);
